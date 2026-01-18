@@ -1,15 +1,13 @@
-# Smart City Route Management System
+# ClearWay-AI
 
-**Due Date:** 19 January 2026
+## Overview
+ClearWay-AI is a Smart City Route Management System designed to enhance urban mobility by optimizing transport routes. The system aims to reduce travel times, congestion, and operational costs for transport authorities. By representing the city's road network as a complex data structure, ClearWay-AI calculates the most efficient paths between various locations.
 
-## 1. Background
+## Key Features
 
-Cities require efficient transport routes to reduce travel times, congestion, and costs. The transport authority has requested a Route Management System that will:
+*   **Road Network Representation**: Accurately models the city's infrastructure using advanced data structures.
+*   **Route Optimization**: Algorithms to determine the optimal path between areas, prioritizing efficiency and speed.
+*   **Explainable AI (XAI)**: A core feature ensuring transparency, providing users with clear explanations for why a specific route or decision was recommended.
 
-*   Represent the city's road network as a data structure.
-*   Optimise routes between different areas.
-*   Provide transparent, explainable output (XAI), showing why each route or decision was chosen.
-
-## Task Overview
-
-You are tasked with designing and implementing this system in **Java** or **C#**.
+## Objective
+The primary goal of ClearWay-AI is to deliver a transparent, intelligent, and efficient tool for managing city transportation flows.
