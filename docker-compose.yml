@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  # Backend Services
+  # Note: These services require the backend code to be present in ./backend/
+  graph-service:
+    build:
+      context: ./backend/GraphService
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - postgres
+
+  routing-service:
+    build:
+      context: ./backend/RoutingService
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - graph-service
+
+  xai-service:
+    build:
+      context: ./backend/XAIService
+      dockerfile: Dockerfile
+    ports:
+      - "5003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  api-gateway:
+    build:
+      context: ./backend/ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - graph-service
+      - routing-service
+      - xai-service
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+
+  # Infrastructure
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: clearway_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
